@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 
 @Service
@@ -38,23 +37,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User updateUser(Long id, User user) {
-        User currentRecord = userRepository.findById(id).get() ;
-        if(Objects.nonNull(user.getAge())){
-            currentRecord.setAge(user.getAge());
-        }
-
-        if(Objects.nonNull(user.getName()) && !"".equalsIgnoreCase(user.getName())){
-            currentRecord.setName(user.getName());
-        }
-
-        if(Objects.nonNull(user.getEmailID()) && !"".equalsIgnoreCase(user.getEmailID())){
-            currentRecord.setEmailID(user.getEmailID());
-        }
-
-        userRepository.save(currentRecord) ;
-
-        return currentRecord ;
-
+    public void updateUser(Long id, User user) {
+        userRepository.deleteById(id) ;
+        userRepository.save(user) ;
+        return ;
     }
 }
