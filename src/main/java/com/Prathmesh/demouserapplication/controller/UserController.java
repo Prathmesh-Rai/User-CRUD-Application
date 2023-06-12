@@ -9,36 +9,36 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/User")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService ;
 
-    @PostMapping("/create")
+    @PostMapping
     public User createUser(@RequestBody User user){
         return userService.createUser(user) ;
     }
 
-    @GetMapping("/getUserByID/{id}")
+    @GetMapping("/{id}")
     public User getUser(@PathVariable Long id){
         return userService.getUser(id) ;
     }
 
 
-    @GetMapping("/getAllUsers")
+    @GetMapping
     public List<User> getAllUsers(){
         return userService.getAllUsers() ;
     }
 
-    @DeleteMapping("/deleteUser/{id}")
+    @DeleteMapping("/{id}")
     public User deleteUser(@PathVariable Long id){
         return userService.deleteUser(id);
     }
 
-    @PutMapping("/updateUser/{id}")
-    public User updateUser(@PathVariable Long id,@RequestBody User user){
-        return userService. updateUser(id,user) ;
+    @PutMapping("/{id}")
+    public void updateUser(@PathVariable Long id,@RequestBody User user){
+        userService.updateUser(id,user) ;
     }
 
 }
